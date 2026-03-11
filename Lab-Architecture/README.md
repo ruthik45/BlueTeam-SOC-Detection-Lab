@@ -70,7 +70,7 @@ Download:
 Oracle VM VirtualBox
 
 Official page:
-- <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">Download VirtualBox</a>
+https://www.virtualbox.org/wiki/Downloads
 
 Download these two files:
 
