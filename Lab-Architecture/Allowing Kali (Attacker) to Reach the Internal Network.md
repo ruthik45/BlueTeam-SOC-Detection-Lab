@@ -167,6 +167,8 @@ Kali can discover internal machines.
 
 This allows the SOC lab to generate realistic attack traffic for detection and monitoring.
 
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/108d2223-85a2-4707-980f-e95080301fb6" />
+
 ---
 
 # Monitoring the Attack Traffic
@@ -187,6 +189,9 @@ Status → System Logs → Firewall
 ```
 
 You should see traffic generated from the Kali machine.
+
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/3c644672-65f9-41d6-8ce9-ee4784be6012" />
 
 ---
 
