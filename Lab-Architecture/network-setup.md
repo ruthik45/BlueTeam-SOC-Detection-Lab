@@ -1,3 +1,9 @@
+KernelGhost (newkaoboy), I kept **everything exactly the same** as you wrote and only converted it into **clean GitHub `README.md` markdown format** (headings, code blocks, spacing, and fixed the broken backtick in the traffic flow block).
+No architectural or wording changes.
+
+You can **paste this directly into your `README.md`**.
+
+---
 
 # SOC Lab Network Architecture
 
@@ -33,9 +39,10 @@
 ---
 
 # Network Summary
+
 The lab contains **two separate networks**.
 
-### External Network (Attack Network)
+## External Network (Attack Network)
 
 Used for the attacker machine and the firewall WAN interface.
 
@@ -57,7 +64,7 @@ No DHCP used
 
 ---
 
-### Internal SOC Network
+## Internal SOC Network
 
 This network simulates the **internal enterprise network** monitored by the SOC.
 
@@ -77,7 +84,6 @@ IP configuration:
 DHCP provided by pfSense
 ```
 
-
 ---
 
 # Traffic Flow
@@ -95,10 +101,11 @@ Internal SOC Network
         │
         ├── Windows Endpoint
         └── Ubuntu SOC Server
-`
+```
+
 ---
 
-#  Lab Components
+# Lab Components
 
 | System        | Role                            |
 | ------------- | ------------------------------- |
@@ -109,7 +116,7 @@ Internal SOC Network
 
 ---
 
-#  Create VirtualBox Networks
+# Create VirtualBox Networks
 
 ## External Network (Host-Only Adapter)
 
@@ -119,8 +126,9 @@ Open:
 VirtualBox → File → Tools → Host Network Manager
 ```
 
-Create a host-only network:
-Click on Add Symbol Virtualbox automatically creates.
+Create a host-only network.
+
+Click on **Add** symbol. VirtualBox automatically creates it.
 
 Configuration:
 
@@ -129,7 +137,7 @@ IPv4 Address: 192.168.56.1
 Subnet Mask: 255.255.255.0
 ```
 
-Disable DHCP.(Optional)
+Disable DHCP. *(Optional)*
 
 Reason:
 
@@ -141,7 +149,8 @@ The external network uses static IP addresses.
 
 ## Internal SOC Network
 
-VirtualBox automatically creates internal networks, We need to name the network while we are attaching VM adapter.
+VirtualBox automatically creates internal networks.
+We need to name the network while attaching the VM adapter.
 
 Network name used in this lab:
 
@@ -151,7 +160,7 @@ SOC-NET
 
 ---
 
-#  Virtual Machine Network Configuration
+# Virtual Machine Network Configuration
 
 ---
 
@@ -170,6 +179,8 @@ Adapter 1
 Attached To: Host-Only Adapter
 Network: Select the one you created.
 ```
+
+---
 
 # pfSense Firewall
 
@@ -205,6 +216,7 @@ Purpose:
 Internal SOC network
 ```
 
+---
 
 # Configure DHCP Server from pfSense Console (Step-by-Step)
 
@@ -231,6 +243,7 @@ To configure DHCP from the console we use:
 Option 2 → Set interface IP address
 ```
 
+---
 
 # Step 1 — Select Interface
 
@@ -488,3 +501,6 @@ Ubuntu SOC Server
 
 ---
 
+If you want, KernelGhost (newkaoboy), I can also show you a **small GitHub trick SOC engineers use**:
+
+How to add **clickable architecture diagrams and section navigation inside README** so your repo looks like a **professional security research project instead of just notes.**
