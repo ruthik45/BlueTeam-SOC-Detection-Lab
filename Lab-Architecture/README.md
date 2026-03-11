@@ -1,7 +1,7 @@
 
 [⬅ Back to Main Project Documentation](../README.md)
 
-# SOC Lab – Lab Setup Documentation Structure
+
 
 ## 1. Lab Overview
 
@@ -9,6 +9,10 @@
 * Simulated enterprise network
 * Logs forwarded to **Splunk SIEM**
 * Multiple operating systems generating telemetry
+
+##Lab architecture:
+<img width="2816" height="1536" alt="image" src="https://github.com/user-attachments/assets/411271fa-c484-499e-87f6-053c6612cfe5" />
+
 
 **Machines in the Lab**
 
@@ -198,7 +202,7 @@ kali-linux-2025.1-virtualbox-amd64.ova
 ❌ **No account required**
 
 ### Installation
-<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/1626f7cc-2fde-4cd0-93f7-137deb6b2dd2" />
+
 
 Just import the OVA:
 
@@ -253,7 +257,7 @@ Official page:
 
 [https://www.splunk.com/en_us/download/splunk-enterprise.html](https://www.splunk.com/en_us/download/splunk-enterprise.html)
 
-Download the **Linux .deb package** for Ubuntu.
+Download the **Linux .deb package** for Ubuntu.(This should download in Ubuntu desktop vm later)
 
 Example:
 
@@ -263,7 +267,7 @@ splunk-9.x.x-linux-amd64.deb
 
 ### Account Required?
 
-✅ **Yes — free account required**
+✅ **Yes — free account required**(https://www.fakenamegenerator.com/)(https://emailfake.com/)
 
 Reason:
 
@@ -301,6 +305,11 @@ splunkforwarder-9.x.x-linux-amd64.deb
 
 ---
 
+**Sysmon**
+
+[https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+
+---
 # Complete Download Summary
 
 | Component                 | File Type     | Account Required |
@@ -316,122 +325,224 @@ splunkforwarder-9.x.x-linux-amd64.deb
 
 ---
 
-# Important Note for Your GitHub Documentation
 
-You should include a section like:
 
-```
-Lab Requirements → Software Downloads
-```
 
-Example:
-
-```
-All software used in this SOC lab must be downloaded from
-official sources to ensure integrity and avoid tampered images.
-```
-
-This makes your repository look **professional and security-focused**.
-
----
-
-If you want, KernelGhost, I can also give you **one more powerful section for your GitHub SOC lab**:
-
-**“File Integrity Verification (SHA256)”**
-
-This is something **real security engineers do before installing ISO images**, and almost no beginner lab guides include it.
-
-**Sysmon**
-
-[https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
-
----
 
 # 5. Virtual Machine Creation (VirtualBox)
 
-Document **how each VM is created**.
+ lab contains **4 virtual machines**.
 
-Example:
+| VM             | Role                     | Installation Method |
+| -------------- | ------------------------ | ------------------- |
+| pfSense        | Firewall                 | ISO                 |
+| Windows 11     | Endpoint                 | ISO                 |
+| Ubuntu Desktop | Splunk SIEM + Linux logs | ISO                 |
+| Kali Linux     | Attacker machine         | OVA (prebuilt VM)   |
 
-### Creating Windows 11 VM
+---
 
-Steps:
+# 1. Windows 11 Installation (ISO Required)
 
-1. Open **VirtualBox**
-2. Click **New**
-3. Configure
+## Why ISO is Required
+
+Microsoft distributes Windows installation media as **ISO images**, so the OS must be installed manually.
+
+## File Type
+
+```
+.iso
+```
+
+Example
+
+```
+Win11_23H2_English_x64.iso
+```
+
+## VirtualBox Setup
 
 ```
 Name: Windows11-SOC
 Type: Microsoft Windows
 Version: Windows 11 (64-bit)
+
 RAM: 4096 MB
 CPU: 2
-Disk: 50 GB (VDI)
+Disk: 50 GB
 ```
 
-Then attach the ISO.
+Attach ISO in:
+
+```
+Settings → Storage → Optical Drive → Choose ISO
+```
+
+Boot the VM and install Windows.
+
+After installation:
+
+```
+Remove ISO from Optical Drive
+```
+
+Reason:
+
+```
+To prevent the VM from booting back into the installer
+```
 
 ---
 
-### Creating Kali Linux VM
+# 2. Ubuntu Desktop Installation (ISO Required)
+
+Ubuntu is installed manually because you will **install Splunk on it later**.
+
+## File Type
 
 ```
-Name: Kali-Attacker
+.iso
+```
+
+Example
+
+```
+ubuntu-24.04-desktop-amd64.iso
+```
+
+## VM Configuration
+
+```
+Name: SOC-Splunk-Server
+
 RAM: 4096 MB
 CPU: 2
-Disk: 40 GB
+Disk: 50 GB
 ```
 
-Attach Kali ISO.
+Attach ISO and install Ubuntu.
+
+After installation:
+
+```
+Remove ISO
+```
+
+Reason
+
+```
+System should boot from installed disk
+```
 
 ---
 
-### Creating Ubuntu VM
+# 3. pfSense Firewall (ISO Required)
+
+pfSense is distributed as a **bootable ISO installer**.
+
+## File Type
 
 ```
-Name: Ubuntu-Endpoint
-RAM: 4096 MB
-CPU: 2
-Disk: 40 GB
+.iso
 ```
 
-Attach Ubuntu ISO.
-
----
-
-### Creating pfSense Firewall
+Example
 
 ```
-Name: pfSense-Firewall
+pfSense-CE-2.7.2-RELEASE-amd64.iso
+```
+
+## VM Configuration
+
+```
+Name: SOC-Firewall
+
 RAM: 2048 MB
 CPU: 2
 Disk: 20 GB
 ```
 
-Attach pfSense ISO.
+After installation:
+
+```
+Remove ISO
+```
+
+Reason
+
+```
+Firewall must boot from installed disk
+```
 
 ---
 
+# 4. Kali Linux Attacker Machine (OVA – No ISO Needed)
+
+Kali provides **prebuilt VirtualBox images**.
+
+These contain:
+
+* OS installed
+* Virtual disk
+* VM configuration
+
+So installation is **not required**.
+
+---
+
+## File Type
+
+```
+.ova
+```
+
+Example
+
+```
+kali-linux-2025.1-virtualbox-amd64.ova
+```
+
+---
+
+## Importing in VirtualBox
+
+```
+File
+ → Import Appliance
+ → Select kali-linux.ova
+```
+
+VirtualBox automatically creates the VM.
+
+---
+
+## Why Kali Uses OVA
+
+Advantages:
+
+```
+No installation required
+Preconfigured tools
+Faster setup
+Less configuration errors
+```
+
+---
+
+# Summary of Installation Types
+
+| VM             | File Type | Installation        |
+| -------------- | --------- | ------------------- |
+| Windows 11     | .iso      | Manual installation |
+| Ubuntu Desktop | .iso      | Manual installation |
+| pfSense        | .iso      | Manual installation |
+| Kali Linux     | .ova      | Prebuilt VM import  |
+
+
 # 6. Network Architecture
 
-Very important for SOC labs.
 
-Explain **how machines communicate**.
 
-Example architecture:
-
-```
-                Internet (Optional)
-                       |
-                   pfSense
-                (Firewall)
-                       |
-            ---------------------
-            |        |         |
-        Windows    Ubuntu     Kali
-        Endpoint   Endpoint   Attacker
-```
 
 In **VirtualBox**
 
