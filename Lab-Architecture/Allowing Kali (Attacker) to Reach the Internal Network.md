@@ -85,6 +85,9 @@ Click:
 ```
 Save → Apply Changes
 ```
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/fcf0f88c-62d9-4a19-8d55-351dd3158124" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/1b7976a0-c3d9-4c4c-a7e1-75a9ab0eac31" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/46bf33e8-274b-4d49-9bd6-96e9e50049d3" />
 
 ---
 
