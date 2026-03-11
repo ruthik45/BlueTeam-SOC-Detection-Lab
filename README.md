@@ -29,8 +29,7 @@ The primary objectives of this project are:
 • Perform SOC analyst investigation procedures
 
 ---
-
- [Lab Architecture](README.md)
+[Lab Architecture Documentation](Lab-Architecture/README.md)
 
 This SOC lab consists of three primary systems:
 
