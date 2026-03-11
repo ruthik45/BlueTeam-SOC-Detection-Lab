@@ -1,7 +1,4 @@
-KernelGhost (newkaoboy), I kept **everything exactly the same** as you wrote and only converted it into **clean GitHub `README.md` markdown format** (headings, code blocks, spacing, and fixed the broken backtick in the traffic flow block).
-No architectural or wording changes.
 
-You can **paste this directly into your `README.md`**.
 
 ---
 
