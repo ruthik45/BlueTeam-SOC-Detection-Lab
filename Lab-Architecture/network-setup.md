@@ -666,3 +666,184 @@ Ubuntu SOC Server
 ```
 
 ---
+
+# Connectivity Test
+
+This section verifies that all machines in the SOC lab can communicate correctly.
+
+The goal is to confirm:
+
+* Each machine has received the correct IP configuration
+* Internal devices can reach each other
+* Internal devices can reach the firewall gateway
+* The attacker machine can reach the firewall
+
+---
+
+# Step 1 — Verify IP Address on Each Machine
+
+Before testing connectivity, first confirm the IP configuration.
+
+## Windows Endpoint
+
+Open **Command Prompt** and run:
+
+```
+ipconfig
+```
+
+Verify the following:
+
+* IPv4 Address
+* Subnet Mask
+* Default Gateway
+
+---
+
+## Ubuntu SOC Server
+
+Open terminal and run:
+
+```
+ip a
+```
+
+or
+
+```
+ip addr
+```
+
+Verify:
+
+* Interface IP address
+* Network interface status
+
+---
+
+## Kali Linux
+
+Open terminal and run:
+
+```
+ip a
+```
+
+or
+
+```
+ifconfig
+```
+
+Verify:
+
+* Attacker machine IP address
+* Network interface status
+
+---
+
+# Step 2 — Verify Internal Network Connectivity
+
+Now confirm that internal machines can communicate.
+
+Test from **Windows to Ubuntu**:
+
+```
+ping <Ubuntu SOC Server>
+```
+
+Test from **Ubuntu to Windows**:
+
+```
+ping <Windows Endpoint>
+```
+
+Purpose:
+
+```
+Verify communication within the internal SOC network
+```
+
+---
+
+# Step 3 — Verify Gateway Connectivity
+
+All internal machines must be able to reach the firewall gateway.
+
+Test from **Windows**:
+
+```
+ping <pfSense LAN Gateway>
+```
+
+Test from **Ubuntu**:
+
+```
+ping <pfSense LAN Gateway>
+```
+
+Purpose:
+
+```
+Confirm the firewall is reachable and routing traffic correctly
+```
+
+---
+
+# Step 4 — Verify Attacker Network Connectivity
+
+Test communication between the attacker machine and the firewall.
+
+From **Kali Linux**:
+
+```
+ping <pfSense WAN Interface>
+```
+
+Purpose:
+
+```
+Verify connectivity between attacker network and firewall
+```
+
+---
+
+# Step 5 — Optional Cross Network Test
+
+If firewall rules allow it, test communication from the attacker machine to internal devices.
+
+From **Kali Linux**:
+
+```
+ping <Windows Endpoint>
+```
+
+```
+ping <Ubuntu SOC Server>
+```
+
+Purpose:
+
+```
+Verify routing through the firewall
+```
+
+---
+
+# Step 6 — Record Verification Results
+
+After performing the tests, record the results in a table.
+
+Example format:
+
+| Source Machine    | Destination           | Example IP     | Test Command        | Result  |
+| ----------------- | --------------------- | -------------- | ------------------- | ------- |
+| Windows Endpoint  | Ubuntu SOC Server     | 192.168.10.103 | ping 192.168.10.103 | Success |
+| Ubuntu SOC Server | Windows Endpoint      | 192.168.10.102 | ping 192.168.10.102 | Success |
+| Windows Endpoint  | pfSense LAN Gateway   | 192.168.10.1   | ping 192.168.10.1   | Success |
+| Ubuntu SOC Server | pfSense LAN Gateway   | 192.168.10.1   | ping 192.168.10.1   | Success |
+| Kali Linux        | pfSense WAN Interface | 192.168.56.1   | ping 192.168.56.1   | Success |
+
+
+
+---
