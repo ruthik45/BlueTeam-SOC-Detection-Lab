@@ -211,6 +211,92 @@ No attack traffic is generated
 SOC monitoring becomes impossible
 ```
 
-This configuration enables **realistic attacker simulation inside the SOC lab environment**.
+---
+
+# Enabling ICMP (Ping) on Windows Victim Machine(Just to avoid confusions this will only trouble a you ping windows not attack)
+
+## Purpose
+
+In the SOC lab environment, **Windows Defender Firewall blocks ICMP Echo Requests (Ping) by default**.
+
+This means that even if the **pfSense firewall rule allows traffic from Kali to the LAN network**, the Windows machine may still **not respond to ping requests**.
+
+To allow network testing and reconnaissance during attack simulation, we must **enable the ICMPv4 rule in Windows Defender Firewall**.
 
 ---
+
+# Step 1 — Open Command Prompt as Administrator
+
+On the **Windows victim machine**:
+
+1. Open the **Start Menu**
+2. Search for **Command Prompt**
+3. Right-click and select:
+
+```
+Run as Administrator
+```
+
+---
+
+# Step 2 — Enable ICMP Rule
+
+Run the following command:
+
+```bash
+netsh advfirewall firewall set rule name="Allow ICMPv4" new enable=yes
+```
+
+This command enables the **ICMPv4 Echo Request rule**, allowing the system to respond to ping requests.
+
+---
+
+# Step 3 — Verify Firewall Rule
+
+To confirm the rule is enabled, run:
+
+```bash
+netsh advfirewall firewall show rule name="Allow ICMPv4"
+```
+
+Expected output:
+
+```
+Enabled: Yes
+```
+
+---
+
+# Step 4 — Test Connectivity from Kali
+
+From the Kali attacker machine, run:
+
+```bash
+ping 192.168.10.100
+```
+
+Example output:
+
+```
+64 bytes from 192.168.10.100: icmp_seq=1 ttl=128 time=1.2 ms
+```
+
+This confirms that the **Windows victim machine is now reachable from Kali**.
+
+---
+
+# Why This Step Is Important
+
+Without enabling ICMP:
+
+```
+Kali → pfSense → Windows
+```
+
+The packet will reach Windows, but Windows will **drop the request due to firewall rules**.
+
+This may cause confusion during lab testing because it appears as if the **network configuration is incorrect**, when the issue is actually the **Windows firewall blocking ICMP**.
+
+---
+
+
