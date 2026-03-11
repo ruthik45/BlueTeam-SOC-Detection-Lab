@@ -14,7 +14,7 @@ By default, **pfSense blocks all incoming traffic from WAN to LAN** for security
 2. A **Default Route on Kali** so packets are sent through the pfSense firewall.
 
 ---
-
+ 
 # Network Architecture
 
 ```
