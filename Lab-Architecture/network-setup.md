@@ -484,6 +484,175 @@ DNS: 192.168.10.1
 
 ---
 
+---
+
+# Configure WAN Interface (pfSense Console)
+
+After booting pfSense and assigning interfaces, configure the **WAN interface IPv4 settings**.
+
+From the pfSense console menu:
+
+```
+Welcome to pfSense
+
+1) Assign Interfaces
+2) Set interface IP address
+3) Reset webConfigurator password
+4) Reset to factory defaults
+5) Reboot system
+6) Halt system
+7) Ping host
+8) Shell
+```
+
+Select:
+
+```
+2
+```
+
+This option is used to configure **interface IP addresses and DHCP services**.
+
+---
+
+# Step 1 — Select Interface
+
+pfSense will display the available interfaces.
+
+```
+Available interfaces:
+
+1 - WAN (em0)
+2 - LAN (em1)
+
+Enter the number of the interface you wish to configure:
+```
+
+Choose:
+
+```
+1
+```
+
+Because we are configuring the **WAN interface**.
+
+---
+
+# Step 2 — Configure IPv4 Address
+
+pfSense will ask:
+
+```
+Configure IPv4 address WAN interface via DHCP? (y/n)
+```
+
+Choose:
+
+```
+n
+```
+
+Reason:
+
+```
+The external attack network uses static addressing.
+```
+
+---
+
+# Step 3 — Enter WAN IPv4 Address
+
+Prompt:
+
+```
+Enter the new WAN IPv4 address:
+```
+
+Enter:
+
+```
+192.168.56.1
+```
+
+---
+
+# Step 4 — Enter Subnet Mask
+
+Prompt:
+
+```
+Enter the new WAN IPv4 subnet bit count (1 to 32):
+```
+
+Enter:
+
+```
+24
+```
+
+Which corresponds to:
+
+```
+255.255.255.0
+```
+
+---
+
+# Step 5 — Configure Upstream Gateway
+
+Prompt:
+
+```
+Enter the new WAN IPv4 upstream gateway address:
+```
+
+Example:
+
+```
+192.168.56.1
+```
+
+If no upstream gateway exists, you may press:
+
+```
+ENTER
+```
+
+---
+
+# Step 6 — Configure IPv6
+
+pfSense will ask:
+
+```
+Configure IPv6 address WAN interface via DHCP6? (y/n)
+```
+
+Choose:
+
+```
+n
+```
+
+IPv6 is not required for this lab environment.
+
+---
+
+# Step 7 — Apply WAN Configuration
+
+pfSense will apply the WAN configuration and return to the console menu.
+
+Example result:
+
+```
+WAN IP address: 192.168.56.1
+Subnet: /24
+Gateway: none
+```
+
+---
+
+
 # Correct DHCP Flow in the Lab
 
 ```
@@ -500,7 +669,3 @@ Ubuntu SOC Server
 ```
 
 ---
-
-If you want, KernelGhost (newkaoboy), I can also show you a **small GitHub trick SOC engineers use**:
-
-How to add **clickable architecture diagrams and section navigation inside README** so your repo looks like a **professional security research project instead of just notes.**
