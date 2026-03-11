@@ -30,7 +30,7 @@ The primary objectives of this project are:
 
 ---
 
-# Lab Architecture
+ [Lab Architecture](README.md)
 
 This SOC lab consists of three primary systems:
 
