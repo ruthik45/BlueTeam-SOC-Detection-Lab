@@ -70,8 +70,7 @@ Download:
 Oracle VM VirtualBox
 
 Official page:
-[https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
-<a href="[https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)" target="_blank">Download Kali Linux</a>
+- <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">Download VirtualBox</a>
 
 Download these two files:
 
