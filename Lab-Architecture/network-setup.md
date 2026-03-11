@@ -549,7 +549,7 @@ Configure IPv4 address WAN interface via DHCP? (y/n)
 Choose:
 
 ```
-n
+y
 ```
 
 Reason:
