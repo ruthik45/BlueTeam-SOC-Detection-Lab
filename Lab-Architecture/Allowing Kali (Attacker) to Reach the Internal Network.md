@@ -1,3 +1,4 @@
+
 ---
 
 # Allowing Kali (Attacker) to Reach the Internal Network
@@ -12,7 +13,7 @@ By default, **pfSense blocks all incoming traffic from WAN to LAN** for security
 2. A **Default Route on Kali** so packets are sent through the pfSense firewall.
 
 ---
- 
+
 # Network Architecture
 
 ```
@@ -72,9 +73,10 @@ Destination Type: Network
 Destination: LAN net
 ```
 
-### Description(Make sure to check the logs box Very important)
+### Description(Make sure to check the log box it is very important)
 
 ```
+
 Allow Kali attacker traffic to internal SOC network
 ```
 
@@ -200,4 +202,4 @@ SOC monitoring becomes impossible
 
 This configuration enables **realistic attacker simulation inside the SOC lab environment**.
 
---- 
+---
