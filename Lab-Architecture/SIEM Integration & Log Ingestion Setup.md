@@ -130,11 +130,6 @@ This registers the endpoint with the Splunk server.
 
 # Step 4 — Install Sysmon on Windows Endpoint
 
-Got it, **KernelGhost (newkaoboy)**. You’re right to call that out — **Sysmon is an external telemetry tool**, not part of Windows by default, and the **forwarder configuration location matters**. Let’s structure this clearly so your **lab documentation looks like a real SOC deployment guide**.
-
----
-
-# Sysmon Integration with Splunk (Windows Endpoint)
 
 ## What Sysmon Is
 
