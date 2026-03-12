@@ -275,136 +275,6 @@ index = windows
 
 ---
 
-# Indexing Strategy in Splunk
-
-This is an important **SIEM architecture decision**.
-
-You have two options.
-
----
-
-# Option 1 — Single Index (Simple Lab Setup)
-
-Example:
-
-```
-index = windows
-```
-
-All Windows logs go into **one index**.
-
-Example structure:
-
-```
-windows index
- ├─ Security logs
- ├─ System logs
- ├─ Application logs
- └─ Sysmon logs
-```
-
-### Advantages
-
-* Simple configuration
-* Easier searching
-
-Example search:
-
-```
-index=windows
-```
-
-### Recommended for
-
-Small SOC labs.
-
----
-
-# Option 2 — Multiple Indexes (Production SOC)
-
-Example indexes:
-
-```
-windows_security
-windows_sysmon
-windows_system
-```
-
-Configuration example:
-
-```
-[WinEventLog://Security]
-index = windows_security
-
-[WinEventLog://Microsoft-Windows-Sysmon/Operational]
-index = windows_sysmon
-```
-
-### Advantages
-
-Better data organization.
-
-SOC teams separate logs by **data source**.
-
-Example searches:
-
-```
-index=windows_sysmon
-```
-
-```
-index=windows_security
-```
-
----
-
-# Recommended Index Structure for  Lab
-
-For a beginner SOC lab, keep it simple.
-
-Example indexes:
-
-```
-windows
-linux
-firewall
-```
-
-Example mapping:
-
-| Source       | Index    |
-| ------------ | -------- |
-| Windows logs | windows  |
-| Ubuntu logs  | linux    |
-| pfSense logs | firewall |
-
----
-
----
-
-# Final Configuration Files in Your Lab
-
-### Windows Forwarder
-
-```
-inputs.conf
-outputs.conf
-```
-
-### Ubuntu Forwarder
-
-```
-inputs.conf
-outputs.conf
-```
-
-### Splunk Server
-
-```
-Receiving Port: 9997
-Syslog Port: 514
-```
-
 ---
 
 
@@ -631,6 +501,136 @@ Splunk UDP Input
    │
    ▼
 Splunk Indexer
+```
+
+# Indexing Strategy in Splunk
+
+This is an important **SIEM architecture decision**.
+
+You have two options.
+
+---
+
+# Option 1 — Single Index (Simple Lab Setup)
+
+Example:
+
+```
+index = windows
+```
+
+All Windows logs go into **one index**.
+
+Example structure:
+
+```
+windows index
+ ├─ Security logs
+ ├─ System logs
+ ├─ Application logs
+ └─ Sysmon logs
+```
+
+### Advantages
+
+* Simple configuration
+* Easier searching
+
+Example search:
+
+```
+index=windows
+```
+
+### Recommended for
+
+Small SOC labs.
+
+---
+
+# Option 2 — Multiple Indexes (Production SOC)
+
+Example indexes:
+
+```
+windows_security
+windows_sysmon
+windows_system
+```
+
+Configuration example:
+
+```
+[WinEventLog://Security]
+index = windows_security
+
+[WinEventLog://Microsoft-Windows-Sysmon/Operational]
+index = windows_sysmon
+```
+
+### Advantages
+
+Better data organization.
+
+SOC teams separate logs by **data source**.
+
+Example searches:
+
+```
+index=windows_sysmon
+```
+
+```
+index=windows_security
+```
+
+---
+
+# Recommended Index Structure for  Lab
+
+For a beginner SOC lab, keep it simple.
+
+Example indexes:
+
+```
+windows
+linux
+firewall
+```
+
+Example mapping:
+
+| Source       | Index    |
+| ------------ | -------- |
+| Windows logs | windows  |
+| Ubuntu logs  | linux    |
+| pfSense logs | firewall |
+
+---
+
+---
+
+# Final Configuration Files in Your Lab
+
+### Windows Forwarder
+
+```
+inputs.conf
+outputs.conf
+```
+
+### Ubuntu Forwarder
+
+```
+inputs.conf
+outputs.conf
+```
+
+### Splunk Server
+
+```
+Receiving Port: 9997
+Syslog Port: 514
 ```
 
 ---
