@@ -255,24 +255,6 @@ Explanation:
 
 ---
 
-# Windows Event Log Inputs (Example)
-
-Your forwarder can monitor multiple logs:
-
-```
-[WinEventLog://Security]
-disabled = 0
-index = windows
-
-[WinEventLog://System]
-disabled = 0
-index = windows
-
-[WinEventLog://Application]
-disabled = 0
-index = windows
-```
-
 ---
 
 ---
@@ -656,4 +638,3 @@ You should see logs from:
 * pfSense
 
 ---
-he **real SOC analyst skills interviews look for**.
