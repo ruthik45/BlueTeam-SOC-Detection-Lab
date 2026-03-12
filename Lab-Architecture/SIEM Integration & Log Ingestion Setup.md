@@ -1,11 +1,4 @@
 
-Alright **KernelGhost (newkaoboy)** — this is the **core of your SOC lab**: *log ingestion pipeline*.
-What you’re building is basically:
-
-**Endpoints → Log Collection → Forwarders → Splunk Indexer → Search & Analysis**
-
-Your GitHub section should read like a **SOC deployment runbook**. Below is a **clean structure + correct order** you can document.
-
 ---
 
 # SIEM Integration & Log Ingestion Setup
@@ -31,7 +24,7 @@ Logs are forwarded using:
 
 ### Download
 
-Download Splunk Enterprise for Linux from the official site.
+Download Splunk Enterprise for Linux from the official site.([⬅ Back to Download sources](../Virtualbox-setup.md))
 
 Example package:
 
@@ -466,19 +459,4 @@ You should see logs from:
 * pfSense
 
 ---
-
-💡 **KernelGhost tip:**
-Your next GitHub section after this should be:
-
-```
-Detection Engineering
-```
-
-Examples:
-
-* Detect port scans
-* Detect brute force
-* Detect reverse shells
-* Detect persistence
-
-Those are the **real SOC analyst skills interviews look for**.
+he **real SOC analyst skills interviews look for**.
