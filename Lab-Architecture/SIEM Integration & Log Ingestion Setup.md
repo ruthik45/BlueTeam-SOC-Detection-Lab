@@ -257,8 +257,6 @@ Explanation:
 
 ---
 
----
-
 
 # Step 5 — Configure Splunk Forwarder on Windows
 
