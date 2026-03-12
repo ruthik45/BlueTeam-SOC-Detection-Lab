@@ -130,43 +130,45 @@ This registers the endpoint with the Splunk server.
 
 # Step 4 — Install Sysmon on Windows Endpoint
 
-Windows already has logs, but they are **limited for security monitoring**.
+Got it, **KernelGhost (newkaoboy)**. You’re right to call that out — **Sysmon is an external telemetry tool**, not part of Windows by default, and the **forwarder configuration location matters**. Let’s structure this clearly so your **lab documentation looks like a real SOC deployment guide**.
 
-Therefore we install:
+---
+
+# Sysmon Integration with Splunk (Windows Endpoint)
+
+## What Sysmon Is
 
 Sysmon
 
-Sysmon provides **deep telemetry** for detection engineering.
+### Definition
 
-### Download Sysmon
+Sysmon is a **Windows system monitoring tool from Microsoft Sysinternals** that logs detailed system activity to the Windows Event Log.
 
-From Microsoft Sysinternals.
+### Purpose
 
-Extract files:
+It provides **high-fidelity telemetry** used by SOC analysts and detection engineers.
 
-```
-Sysmon.exe
-Sysmon64.exe
-```
+### Why We Need Sysmon Even Though Windows Has Logs
 
-### Install Sysmon
+Windows native logs are **limited for threat detection**.
 
-```
-Sysmon64.exe -i sysmonconfig.xml
-```
+| Windows Native Logs | Sysmon Logs                        |
+| ------------------- | ---------------------------------- |
+| Login events        | Process creation with command line |
+| Service start/stop  | Network connections per process    |
+| System errors       | File creation monitoring           |
+| Application logs    | Registry persistence detection     |
 
-Purpose:
+Example detection use cases:
 
-Sysmon captures events such as:
+| Attack Activity   | Sysmon Event                    |
+| ----------------- | ------------------------------- |
+| Malware execution | Event ID 1 (Process creation)   |
+| C2 communication  | Event ID 3 (Network connection) |
+| Persistence       | Event ID 13 (Registry change)   |
+| File dropper      | Event ID 11 (File creation)     |
 
-| Event               | Detection Use     |
-| ------------------- | ----------------- |
-| Process creation    | Malware execution |
-| Network connections | C2 communication  |
-| File creation       | Malware dropper   |
-| Registry changes    | Persistence       |
-
-These events are stored in:
+Location of Sysmon logs in Windows:
 
 ```
 Event Viewer
@@ -179,36 +181,237 @@ Operational
 
 ---
 
-# Why Sysmon is Needed
+# Installing Sysmon
 
-Windows Event Logs alone are **not detailed enough for threat detection**.
+Download from Microsoft Sysinternals.
 
-### Windows Native Logs
+Files extracted:
 
-Examples:
+```
+Sysmon.exe
+Sysmon64.exe
+```
 
-| Log             | Information  |
-| --------------- | ------------ |
-| Security log    | Login events |
-| System log      | OS events    |
-| Application log | App crashes  |
+Install Sysmon with configuration:
 
-### Sysmon Logs
+```
+Sysmon64.exe -i sysmonconfig.xml
+```
 
-Provide **high-fidelity security telemetry**.
-
-Example events:
-
-| Event ID | Description        |
-| -------- | ------------------ |
-| 1        | Process creation   |
-| 3        | Network connection |
-| 7        | DLL loaded         |
-| 11       | File creation      |
-
-SOC analysts use these events to detect attacks.
+The XML config defines **which events Sysmon logs**.
 
 ---
+
+# Where to Configure Sysmon Log Collection in Splunk Forwarder
+
+
+Path:
+
+```
+C:\Program Files\SplunkUniversalForwarder\etc\apps\<app_name>\local\inputs.conf
+```
+
+Example:
+
+```
+C:\Program Files\SplunkUniversalForwarder\etc\apps\sysmon_inputs\local\inputs.conf
+```
+
+Why?
+
+```
+Splunk architecture uses apps for modular configuration.
+```
+
+Benefits:
+
+* Easier management
+* Clear separation of configs
+* No modification of default system files
+* Easier upgrades
+
+---
+
+# Example Sysmon Inputs Configuration
+
+File:
+
+```
+inputs.conf
+```
+
+Example configuration:
+
+```
+[WinEventLog://Microsoft-Windows-Sysmon/Operational]
+disabled = 0
+index = windows
+renderXml = true
+```
+
+Explanation:
+
+| Parameter      | Meaning                            |
+| -------------- | ---------------------------------- |
+| WinEventLog    | Monitor Windows Event Log          |
+| disabled=0     | Enable input                       |
+| index          | Splunk index where logs are stored |
+| renderXml=true | Preserve full event structure      |
+
+---
+
+# Windows Event Log Inputs (Example)
+
+Your forwarder can monitor multiple logs:
+
+```
+[WinEventLog://Security]
+disabled = 0
+index = windows
+
+[WinEventLog://System]
+disabled = 0
+index = windows
+
+[WinEventLog://Application]
+disabled = 0
+index = windows
+```
+
+---
+
+# Indexing Strategy in Splunk
+
+This is an important **SIEM architecture decision**.
+
+You have two options.
+
+---
+
+# Option 1 — Single Index (Simple Lab Setup)
+
+Example:
+
+```
+index = windows
+```
+
+All Windows logs go into **one index**.
+
+Example structure:
+
+```
+windows index
+ ├─ Security logs
+ ├─ System logs
+ ├─ Application logs
+ └─ Sysmon logs
+```
+
+### Advantages
+
+* Simple configuration
+* Easier searching
+
+Example search:
+
+```
+index=windows
+```
+
+### Recommended for
+
+Small SOC labs.
+
+---
+
+# Option 2 — Multiple Indexes (Production SOC)
+
+Example indexes:
+
+```
+windows_security
+windows_sysmon
+windows_system
+```
+
+Configuration example:
+
+```
+[WinEventLog://Security]
+index = windows_security
+
+[WinEventLog://Microsoft-Windows-Sysmon/Operational]
+index = windows_sysmon
+```
+
+### Advantages
+
+Better data organization.
+
+SOC teams separate logs by **data source**.
+
+Example searches:
+
+```
+index=windows_sysmon
+```
+
+```
+index=windows_security
+```
+
+---
+
+# Recommended Index Structure for  Lab
+
+For a beginner SOC lab, keep it simple.
+
+Example indexes:
+
+```
+windows
+linux
+firewall
+```
+
+Example mapping:
+
+| Source       | Index    |
+| ------------ | -------- |
+| Windows logs | windows  |
+| Ubuntu logs  | linux    |
+| pfSense logs | firewall |
+
+---
+
+---
+
+# Final Configuration Files in Your Lab
+
+### Windows Forwarder
+
+```
+inputs.conf
+outputs.conf
+```
+
+### Ubuntu Forwarder
+
+```
+inputs.conf
+outputs.conf
+```
+
+### Splunk Server
+
+```
+Receiving Port: 9997
+Syslog Port: 514
+```
+
+---
+
 
 # Step 5 — Configure Splunk Forwarder on Windows
 
@@ -227,21 +430,20 @@ Example configuration:
 ```
 [WinEventLog://Security]
 disabled = 0
+index = windows
 
 [WinEventLog://System]
 disabled = 0
+index = windows
 
 [WinEventLog://Application]
 disabled = 0
-
-[WinEventLog://Microsoft-Windows-Sysmon/Operational]
-disabled = 0
+index = windows
 ```
 
 This tells the forwarder to monitor:
 
 * Windows logs
-* Sysmon logs
 
 ---
 
