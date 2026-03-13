@@ -814,6 +814,7 @@ Expected:
 ```
 udp   0   0 0.0.0.0:514   0.0.0.0:*
 ```
+<img width="792" height="231" alt="image" src="https://github.com/user-attachments/assets/247a6afe-3a08-40a6-9cc3-8051a2a08384" />
 
 ---
 
@@ -846,6 +847,12 @@ Example:
 | ubuntu-server    | /var/log/syslog | linux    |
 | pfsense-firewall | syslog          | firewall |
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/139e8dee-1fab-4b9e-8519-7037de50fc61" />
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a93de57f-abd0-4283-8324-93d25cf48cf9" />
+
+
 ---
 
 # 6 — Check Windows Logs
@@ -864,6 +871,8 @@ System
 Application
 Sysmon
 ```
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6d0edb76-5c0f-43f4-b078-9e2a77c1a501" />
 
 ---
 
@@ -888,6 +897,8 @@ Meaning:
 Login events arriving
 ```
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1855b0fc-f73a-49bb-a311-80d5c8ce4449" />
+
 ---
 
 # 7 — Check Sysmon Logs
@@ -895,7 +906,7 @@ Login events arriving
 Search:
 
 ```
-index=windows sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+index=windows sourcetype="WinEventLog:Microsoft-Windows-Sysmon/Operational"
 ```
 
 Expected events:
@@ -905,6 +916,9 @@ Expected events:
 | 1        | Process creation   |
 | 3        | Network connection |
 | 11       | File creation      |
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/59caa346-a876-4c5b-ba55-8cabc51b67a1" />
 
 ---
 
@@ -931,6 +945,8 @@ cron
 kernel
 ```
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fc827b3c-10c4-4f93-8430-ae04c14a9c7c" />
+
 ---
 
 # 9 — Check Firewall Logs
@@ -954,6 +970,7 @@ pf
 filterlog
 firewall allow/deny
 ```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/33108b84-a588-482b-b006-878d328ace8e" />
 
 ---
 
@@ -970,6 +987,8 @@ Generate login event.
 ```
 Run → logoff
 ```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c9907c70-a000-43d5-9d6b-3d30ca12ef89" />
+
 
 Then log in again.
 
@@ -978,6 +997,7 @@ Check:
 ```
 index=windows EventCode=4624
 ```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/14ffa67f-617e-45a8-8f9d-419c3de6620c" />
 
 ---
 
@@ -985,11 +1005,15 @@ index=windows EventCode=4624
 
 Attempt wrong password.
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/56426beb-11bb-462f-bc46-92b38372f106" />
+
+
 Query:
 
 ```
 index=windows EventCode=4625
 ```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/dd395059-07ed-4dda-9fe1-92333602ca0a" />
 
 ---
 
@@ -1012,6 +1036,7 @@ Expected:
 ```
 Image="notepad.exe"
 ```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/22e1de98-1aca-4807-a9bb-5088ccee01b5" />
 
 ---
 
