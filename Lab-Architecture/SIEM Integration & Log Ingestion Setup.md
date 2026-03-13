@@ -1092,6 +1092,10 @@ filterlog
 action=pass
 ```
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8ecc53e1-c27e-48a4-8abf-23d9c097a523" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/98394d58-58c9-4b75-a951-3f84812a5bf2" />
+
 ---
 
 # 13 — SOC Analyst Health Check Queries
@@ -1106,6 +1110,9 @@ SOC teams run these periodically.
 
 Shows active hosts sending logs.
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a1c73ca1-4644-4014-b6b5-7329dafc6bf5" />
+
+
 ---
 
 ### Index health
@@ -1115,6 +1122,10 @@ Shows active hosts sending logs.
 ```
 
 Shows log count per index.
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cab1e814-e67d-496d-8b85-34649fb3acfc" />
+
 
 ---
 
@@ -1126,6 +1137,9 @@ Shows log count per index.
 
 Shows log type distribution.
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2bc351cc-9abf-40d6-ad12-e2866a9f80f7" />
+
+
 ---
 
 ### Check recent logs
@@ -1135,6 +1149,9 @@ index=* earliest=-5m
 ```
 
 Confirms **logs arriving in real-time**.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6b147ab3-c6cc-4e9b-a60f-05a8c8927a28" />
+
 
 ---
 
@@ -1154,6 +1171,9 @@ Possible causes:
 * outputs.conf wrong
 * receiving port closed
 * firewall blocking
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fee682b2-af4c-40c4-b3c5-b08541b448d3" />
+
 
 ---
 
