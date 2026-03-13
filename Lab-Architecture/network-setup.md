@@ -134,7 +134,7 @@ IPv4 Address: 192.168.56.1
 Subnet Mask: 255.255.255.0
 ```
 
-Disable DHCP. *(Optional)*
+enable DHCP. 
 
 Reason:
 
