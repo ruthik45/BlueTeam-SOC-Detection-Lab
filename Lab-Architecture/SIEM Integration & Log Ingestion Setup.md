@@ -1201,3 +1201,29 @@ SOC detection queries
 ```
 
 ---
+# Important Note
+
+All the commands and queries shown above were executed in my SOC lab environment.
+
+The commands visible in the screenshots may slightly differ from the ones written in the documentation because they were adapted based on my lab setup.
+
+Every lab environment will have different configurations such as:
+
+* Different **IP addresses**
+* Different **index names**
+* Different **hostnames**
+* Different **log paths**
+* Different **network architectures**
+
+Therefore, do **not copy the commands blindly** from this guide.
+
+Before running any command, ensure the following in your environment:
+
+* Replace the **IP addresses** with the correct IP of your Splunk server.
+* Use the **correct index names** configured in your Splunk instance.
+* Ensure the **Splunk receiving port (9997)** is reachable.
+* Verify that **forwarders are properly connected to the indexer**.
+* Confirm **network connectivity between endpoints and the SIEM server**.
+
+Always adapt the commands based on **your own SOC lab configuration** to avoid connection issues or ingestion failures.
+---
