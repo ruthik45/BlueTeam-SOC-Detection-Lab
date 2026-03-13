@@ -1040,22 +1040,6 @@ Image="notepad.exe"
 
 ---
 
-## Generate Network Event
-
-From Windows run:
-
-```
-ping google.com
-```
-
-Query:
-
-```
-index=windows EventCode=3
-```
-
----
-
 # 11 — Linux Log Generation Test
 
 SSH login test.
@@ -1075,6 +1059,13 @@ Expected event:
 ```
 Accepted password for user
 ```
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f1982d6d-617b-4130-9c4d-2369f5d26bcd" />
+
+check:
+  su -
+
+  <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b33ddfe8-073d-4f91-bf24-60e54501ed43" />
 
 ---
 
